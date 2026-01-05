@@ -1,0 +1,92 @@
+-- 1. USERS TABLE
+CREATE TABLE Users (
+    User_ID INT PRIMARY KEY AUTO_INCREMENT,
+    Name VARCHAR(50),
+    App_Credentials VARCHAR(50),
+    Balance DECIMAL(10,2)
+);
+
+INSERT INTO Users (Name, App_Credentials, Balance) VALUES
+('Muhammad Owais', 'muhammad.owais@gmail.com', 100.50),
+('Sudais Ahmad', 'sudais.ahmd@gmail.com', 75.25),
+('Fawad ul Hassan Khan ', 'fawad.khan@gmail.com', 50.00),
+('Alia Zafar', 'alia.zafar@gmail.com', 120.75),
+('Arslan', 'rana.arslan@gmail.com', 85.00);
+
+-- 2. SLOTS TABLE
+CREATE TABLE Slots (
+    Slot_ID VARCHAR(50) PRIMARY KEY,
+    Status VARCHAR(100),
+    Last_Updated TIMESTAMP
+);
+
+INSERT INTO Slots VALUES
+('A-01', 'Available', NOW()),
+('A-02', 'Available', NOW()),
+('A-03', 'Occupied', NOW()),
+('A-04', 'Available', NOW()),
+('A-05', 'Occupied', NOW()),
+('A-06', 'Available', NOW()),
+('A-07', 'Occupied', NOW()),
+('A-08', 'Occupied', NOW()),
+('A-09', 'Available', NOW()),
+('A-10', 'Occupied', NOW());
+
+-- 3. TRANSACTIONS TABLE
+CREATE TABLE Transactions (
+    Ticket_ID INT PRIMARY KEY AUTO_INCREMENT,
+    Entry_Time DATETIME,
+    Exit_Time DATETIME,
+    Plate_Number VARCHAR(20),
+    Total_Fee DECIMAL(10,2)
+);
+
+-- Insert parking data from your first table
+INSERT INTO Transactions (Entry_Time, Exit_Time, Plate_Number, Total_Fee) VALUES
+('2023-10-26 08:15:00', '2023-10-26 17:30:00', 'ABC-1234', 25.00),
+('2023-10-26 09:45:00', '2023-10-26 14:20:00', 'XYZ-5678', 12.50),
+('2023-10-26 11:10:00', NULL, 'DEF-9012', NULL),
+('2023-10-26 12:05:00', '2023-10-26 19:45:00', 'GHI-3456', 20.00),
+('2023-10-26 13:30:00', NULL, 'JKL-7890', NULL),
+('2023-10-26 15:20:00', '2023-10-26 16:45:00', 'MNO-1234', 5.00),
+('2023-10-26 16:50:00', NULL, 'PQR-5678', NULL),
+('2023-10-26 18:05:00', NULL, 'STU-9012', NULL),
+('2023-10-26 10:00:00', '2023-10-26 12:30:00', 'VWX-3456', 7.50),
+('2023-10-26 20:15:00', NULL, 'YZA-7890', NULL);
+
+-- 4. HARDWARE_LOGS TABLE
+CREATE TABLE Hardware_Logs (
+    Log_ID INT PRIMARY KEY AUTO_INCREMENT,
+    Component_ID VARCHAR(50),
+    Status_Code INT
+);
+
+INSERT INTO Hardware_Logs (Component_ID, Status_Code) VALUES
+('Sensor1', 0),
+('Motor3', 1),
+('Sensor5', 0),
+('Motor2', 2),
+('Sensor7', 1);
+
+-- SIMPLE QUERIES TO VIEW DATA
+SELECT '=== USERS ===' as Table_Name;
+SELECT * FROM Users;
+
+SELECT '=== SLOTS ===' as Table_Name;
+SELECT * FROM Slots;
+
+SELECT '=== TRANSACTIONS ===' as Table_Name;
+SELECT * FROM Transactions;
+
+SELECT '=== HARDWARE LOGS ===' as Table_Name;
+SELECT * FROM Hardware_Logs;
+
+-- Find all parked cars (still in parking)
+SELECT 'CURRENTLY PARKED CARS:' as Info;
+SELECT Plate_Number, Entry_Time 
+FROM Transactions 
+WHERE Exit_Time IS NULL;
+
+-- Find available slots
+SELECT 'AVAILABLE SLOTS:' as Info;
+SELECT Slot_ID FROM Slots WHERE Status = 'Available';
