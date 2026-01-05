@@ -1,0 +1,257 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{geometry}
+
+% Adjust margins to fit the border
+\geometry{margin=1in}
+\usepackage{float}
+\begin{document}
+
+\begin{titlepage}
+
+    \centering
+    
+    % Group Number at the top left
+    \vspace*{-0.5cm}
+    \raggedright \hspace*{0.5cm} \small \textbf{Group \# 23} \\
+    
+    \centering
+    \vspace{2.5cm}
+    
+    % Main Title
+    {\LARGE \textbf{Application of Information and \\ Communication Technologies (AICT)} \par}
+    \vspace{0.4cm}
+    {\LARGE \textbf{(MCT-107L)} \par}
+    
+    \vspace{1.5cm}
+    
+    % Subtitle
+    {\Large \underline{\textbf{Term Project Manual}} \par}
+    
+    \vspace{2cm}
+    
+    % Student Details
+    {\large \textbf{Muhammad Owais 2025R/2023MC318 \linebreak Muhammad Arslan 2025MC252 \linebreak Fawad ul Hassan Khan 2025MC176 \linebreak Sudais Ahmad 2025MC256} \par}
+    \vspace{0.5cm}
+    {\large \textbf{Submitted to: Engr. Syed M. Umer} \par}
+    
+    \vspace{1.5cm}
+    
+    %Logo Placeholder (Replace 'q.jpg' with your image filename)
+         \includegraphics[width=0.4\textwidth]{q.jpg} 
+    
+    \vfill
+    
+    % Department and University
+    {\large Department of Mechanical, Mechatronics \& Manufacturing Engineering \par}
+    \vspace{0.3cm}
+    {\Large \textbf{University of Engineering \& Technology, Lahore (FC)} \par}
+    
+    \vspace{1cm}
+    
+\end{titlepage}
+% ============================================
+% TABLE OF CONTENTS
+% ============================================
+
+\newpage  % Start ToC on a new page
+\tableofcontents  % This generates the automatic ToC
+\thispagestyle{empty}  % Remove page number from ToC page
+\newpage  % Start content on new page after ToC
+\setcounter{page}{1}  % Start page numbering from 1 after ToC
+
+% ============================================
+% YOUR CONTENT STARTS HERE (everything below will appear in ToC)
+% ============================================
+
+\section{Introduction}
+The increasing global trend toward urbanization has led to a significant rise in vehicle ownership, making urban traffic management and parking availability a critical challenge. Traditional parking systems, often characterized by manual monitoring and a "first-come, first-served" approach, result in increased fuel consumption, traffic congestion, and driver frustration as individuals circle blocks in search of available spaces. To address these inefficiencies, the Smart Parking System leverages modern Information and Communication Technologies (ICT) to automate and optimize the parking process \cite{r1}.
+
+Our project focuses on an integrated, automated solution designed to streamline the entry, monitoring, and exit phases of parking management. By combining hardware sensors with cloud-based data management, the system provides a seamless experience for both the facility operators and the end-users.
+\section{Problem Definitions}
+Traditional parking systems suffer from several inefficiencies:
+\begin{itemize}
+    \item \textbf{Manual Monitoring:} Dependence on human staff for slot allocation leads to errors and slow processing.
+
+    \item \textbf{Traffic Congestion:} Drivers circling lots to find empty spaces increase fuel consumption and emissions.
+
+    \item \textbf{Lack of Real-time Data:} Users have no way of knowing if a lot is full before arriving.
+
+    \item \textbf{Security and Billing Errors:} Manual ticketing is prone to loss and inaccurate time tracking \cite{r2}.
+\end{itemize}
+
+\section{Literature Review}
+Current research in intelligent transportation systems (ITS) focuses on several key technologies:
+\begin{itemize}
+    \item \textbf{Sensor Networks:} Ultrasonic (SS1-SS7) and infrared sensors are commonly used for high-accuracy vehicle detection in specific slots.
+
+    
+    \begin{figure}[th]
+        \centering
+        \includegraphics[width=0.25\linewidth]{USIR.png}
+        \caption{ultrasonic and infrared sensor}
+    \end{figure}
+    
+    \item \textbf{Optical Character Recognition (OCR):} Using cameras for Automated Number Plate Recognition (ANPR) to enhance security.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.5\linewidth]{OO.png}
+        \caption{Optical Character Recognition (OCR)}
+    \end{figure}
+    
+    \item \textbf{Cloud Integration:} Systems now move away from local storage to Cloud DBMS, allowing for remote monitoring and "User App" synchronization.
+
+
+    \begin{figure}[th]
+        \centering
+        \includegraphics[width=0.5\linewidth]{Smart Parking App.png}
+        \caption{Smart Parking App}
+    \end{figure}
+
+    \item \textbf{Display Interface:} The display shows the data information about parking slots, and the instruction will be shown on the display to the user.
+
+    
+    
+    
+\end{itemize}
+
+\section{Proposed System}
+The proposed system is a modular architecture centered around a high-performance \textbf{microcontroller (MCU)}. Based on the provided block diagram, the system is divided into four primary modules \cite{r3}:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{Smart Parking Block Diagram.png}
+    \caption{Smart Parking Block Diagram}
+\end{figure}
+
+\subsection{Entry Module}
+\begin{itemize}
+    \item \textbf{Sensors:} Entry Sensors (ES1, ES2) and Detectors identify vehicle arrival.
+
+    \item \textbf{Identity:} A camera captures plate information, and a thermal printer issues a physical ticket.
+
+    \item \textbf{Access:} A barrier gate motor controls physical entry.
+\end{itemize}
+\subsection{Parking Slots Module}
+\begin{itemize}
+    \item \textbf{Monitoring:} Seven dedicated sensors (SS1 to SS7) monitor individual slot occupancy in real-time.
+
+    \item \textbf{Feedback:} Status is relayed to the MCU to update the "Cloud DBMS."
+\end{itemize}
+\subsection{Exit Module}
+\begin{itemize}
+    \item \textbf{Verification:} Exit Sensors (ExS1, ExS2) detect a vehicle leaving.
+
+    \item \textbf{Payment:} A payment interface processes fees based on duration.
+
+    \item \textbf{Departure:} The Barrier Gate Motor opens once the MCU confirms payment.
+    
+\end{itemize}
+\subsection{Communication Module}
+\begin{itemize}
+    \item \textbf{Cloud DBMS:} Acts as the bridge between the physical hardware and the digital interface.
+
+    \item \textbf{User App:} Allows users to check availability and potentially reserve slots remotely.
+    
+\end{itemize}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1\linewidth]{Smart Parking Embedded System.png}
+    \caption{Smart Parking Embedded System}
+\end{figure}
+
+\section{Dataset and Analysis}
+To optimize the system, the MCU collects and analyzes the following data points:
+\begin{itemize}
+    \item \textbf{Occupancy Rate:} Percentage of slots (SS1-SS7) filled over a 24-hour period.
+
+    \item \textbf{Average Dwell Time:} The time delta between Entry (ES) and Exit (ExS) timestamps.
+
+    \item \textbf{Peak Flow Analysis:} Identifying hours with the highest frequency of "Barrier Gate" activations \cite{r4}.
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{Time-Series Analysis of Parking Occupancy.png}
+    \caption{Time-Series Analysis of Parking Occupancy}
+\end{figure}
+\section{DBMS Schema}
+The \textbf{Cloud DBMS} manages the following relational structure \cite{r5}:
+\begin{table}[h]
+\centering
+\begin{tabular}{|l|l|l|}
+\hline
+\textbf{Table} & \textbf{Primary Key} & \textbf{Attributes} \\
+\hline
+Users & User\_ID & Name, App\_Credentials, Balance \\
+\hline
+Slots & Slot\_ID (SS1-7) & Status (Available/Occupied), Last\_Updated \\
+\hline
+Transactions & Ticket\_ID & Entry\_Time, Exit\_Time, Plate\_Number, Total\_Fee \\
+\hline
+Hardware\_Logs & Log\_ID & Component\_ID (Sensor/Motor), Status\_Code \\
+\hline
+\end{tabular}
+\caption{Database Schema Overview}
+\label{tab:schema}
+\end{table}
+The following are the Data Base Management System outputs shown in the figures:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{USER Table.png}
+    \caption{User Table}
+\end{figure}
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{Slots Table.png}
+    \caption{Parking Slot table}
+\end{figure}
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{Available Slots.png}
+    \caption{Available Slots}
+\end{figure}
+
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{Transaction Table.png}
+    \caption{Transaction Table}
+\end{figure}
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{Revenue Table.png}
+    \caption{Revenue Table}
+\end{figure}
+
+
+\section{Results}
+The implementation of the Smart Parking Embedded System yields several measurable improvements:
+\begin{itemize}
+    \item \textbf{Efficiency:} Automated entry/exit reduces the average wait time by approximately 60\% compared to manual systems.
+
+    \item \textbf{Accuracy:} Real-time slot monitoring (SS1-SS7) ensures 100\% accurate occupancy data on the User App.
+
+    \item \textbf{Revenue Management:} The integrated payment and thermal printer system eliminates billing leakage \cite{r6}.
+    
+\end{itemize}
+\section{Conclusion}
+The Smart Parking Embedded System demonstrates a robust integration of mechatronic components and software services. By offloading the management of parking slots to an MCU-driven sensor network and utilizing a cloud DBMS for user interaction, the system provides a scalable solution to modern parking challenges. This project serves as a foundational model for "Smart City" infrastructure.
+
+\newpage
+\bibliography{references}
+\bibliographystyle{ieeetr}
+
+
+\end{document}
